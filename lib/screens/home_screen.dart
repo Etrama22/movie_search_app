@@ -10,13 +10,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<dynamic> _movies = [];
-  bool _showRandomMovies = true; // Default to show random movies
+  bool _showRandomMovies = true;
 
   void _updateMovies(List<dynamic> movies) {
     setState(() {
       _movies = movies;
-      _showRandomMovies =
-          false; // Hide random movies when search results are available
+      _showRandomMovies = false;
     });
   }
 

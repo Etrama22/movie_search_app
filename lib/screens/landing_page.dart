@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart'; // Import halaman tujuan navigasi
+import 'home_screen.dart';
 
 class LandingPage extends StatefulWidget {
   @override

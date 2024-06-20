@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My App',
-      home: LandingPage(), // Menggunakan LandingPage sebagai halaman awal
+      home: LandingPage(),
     );
   }
 }

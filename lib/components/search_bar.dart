@@ -73,7 +73,7 @@ class _SearchBarState extends State<MovieSearchBar> {
       padding: const EdgeInsets.all(8.0),
       child: TextField(
         controller: _searchController,
-        onChanged: _fetchMovies, // Pencarian dilakukan saat teks berubah
+        onChanged: _fetchMovies,
         decoration: InputDecoration(
           hintText: 'Search for movies...',
           suffixIcon: _isLoading
@@ -85,7 +85,7 @@ class _SearchBarState extends State<MovieSearchBar> {
                         _searchController.clear();
                       },
                     )
-                  : null, // Tidak menampilkan ikon clear saat field kosong
+                  : null,
         ),
       ),
     );
