@@ -63,7 +63,7 @@ class _LandingPageState extends State<LandingPage> {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 255, 255, 255),
                           padding: EdgeInsets.symmetric(
-                              horizontal: 150, vertical: 20),
+                              horizontal: 100, vertical: 20),
                           textStyle: TextStyle()),
                       child: Text('Continue'),
                     ),

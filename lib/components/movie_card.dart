@@ -16,7 +16,7 @@ class MovieCard extends StatelessWidget {
           children: [
             SizedBox(
               width: double.infinity,
-              height: 270,
+              height: 254,
               child: ClipRRect(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(4.0)),
                 child: Image.network(

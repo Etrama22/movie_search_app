@@ -8,12 +8,19 @@ class MovieList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Mendapatkan lebar layar
+    double screenWidth = MediaQuery.of(context).size.width;
+    // Menentukan jumlah kolom berdasarkan lebar layar
+    int crossAxisCount = screenWidth > 600 ? 3 : 2;
+    // Menentukan aspect ratio berdasarkan jumlah kolom
+    double childAspectRatio = screenWidth > 600 ? 0.6 : 0.6;
+
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: crossAxisCount,
         mainAxisSpacing: 8.0,
         crossAxisSpacing: 8.0,
-        childAspectRatio: 0.7,
+        childAspectRatio: childAspectRatio,
       ),
       itemCount: movies.length,
       itemBuilder: (BuildContext context, int index) {
