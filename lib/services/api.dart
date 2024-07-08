@@ -21,7 +21,7 @@ class ApiService {
   static Future<List<dynamic>> fetchRandomMovies() async {
     final randomQueries = [
       'batman',
-      'superman',
+      'uperman',
       'harry potter',
       'avengers',
       'joker'
