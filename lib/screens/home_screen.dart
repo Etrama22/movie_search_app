@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../components/search_bar.dart';
-import '../components/navbar.dart';
 import '../components/movie_list.dart';
 import '../services/api.dart';
 
@@ -12,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<dynamic> _movies = [];
   bool _showRandomMovies = true;
-  bool _showSearchBar = false; // new variable to track search bar visibility
+  bool _showSearchBar = false;
 
   void _updateMovies(List<dynamic> movies) {
     setState(() {
@@ -83,7 +82,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
         ],
       ),
-      bottomNavigationBar: Navbar(),
     );
   }
 }

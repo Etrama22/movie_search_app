@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "330648637351",
+    "project_id": "movie-search-414a7",
+    "storage_bucket": "movie-search-414a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330648637351:android:94f0fbde53f5d6285e3082",
+        "android_client_info": {
+          "package_name": "com.example.movie_search_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330648637351-sbgeaiqtv8bl2grtj04oj0udb85ff26c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9rOCYXf4rfCzyQSiOMPH6bV2IZ1lNpMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "330648637351-sbgeaiqtv8bl2grtj04oj0udb85ff26c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "330648637351-pc1od4v64pe3vj5eqk3a1ejoo2ciu0h8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.movieSearchApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

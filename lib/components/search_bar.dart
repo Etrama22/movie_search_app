@@ -13,7 +13,6 @@ class MovieSearchBar extends StatefulWidget {
 class _SearchBarState extends State<MovieSearchBar> {
   TextEditingController _searchController = TextEditingController();
   bool _isLoading = false;
-  bool _noResults = false;
 
   @override
   void initState() {
@@ -33,7 +32,6 @@ class _SearchBarState extends State<MovieSearchBar> {
       widget.onMoviesFetched([]);
       setState(() {
         _isLoading = true; // Tampilkan loading indicator saat memuat film acak
-        _noResults = false;
       });
       _fetchRandomMovies();
     }
@@ -49,10 +47,7 @@ class _SearchBarState extends State<MovieSearchBar> {
     setState(() {
       _isLoading = false;
       if (movies.isEmpty) {
-        _noResults = true;
-      } else {
-        _noResults = false;
-      }
+      } else {}
     });
 
     widget.onMoviesFetched(movies);

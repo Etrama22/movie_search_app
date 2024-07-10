@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../services/apiV2.dart';
-import '../components/navbar.dart';
 
 class HotMovieScreen extends StatefulWidget {
   @override
@@ -49,7 +48,6 @@ class _HotMovieScreenState extends State<HotMovieScreen> {
                 );
               },
             ),
-      bottomNavigationBar: Navbar(),
     );
   }
 }
