@@ -4,13 +4,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../components/button.dart';
 import '../components/textfield.dart';
 
+// Halaman pendaftaran pengguna
 class RegisterPage extends StatelessWidget {
+  // Pengontrol untuk form input
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
+  // Fungsi untuk mendaftarkan pengguna
   void registerUser(BuildContext context) async {
+    // Cek jika password dan konfirmasi password tidak sama
     if (passwordController.text.trim() !=
         confirmPasswordController.text.trim()) {
       showDialog(
@@ -31,6 +35,7 @@ class RegisterPage extends StatelessWidget {
       return;
     }
 
+    // Tampilkan dialog loading
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -38,13 +43,14 @@ class RegisterPage extends StatelessWidget {
     );
 
     try {
+      // Mencoba membuat akun dengan email dan password
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
 
-      // Save additional user info to Firestore
+      // Simpan informasi tambahan pengguna ke Firestore
       User? user = userCredential.user;
       if (user != null) {
         await FirebaseFirestore.instance.collection('Users').doc(user.uid).set({
@@ -53,7 +59,9 @@ class RegisterPage extends StatelessWidget {
         });
       }
 
-      Navigator.of(context).pop(); // Close the loading dialog
+      // Tutup dialog loading
+      Navigator.of(context).pop();
+      // Tampilkan dialog pendaftaran berhasil
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -64,7 +72,7 @@ class RegisterPage extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.pushReplacementNamed(
-                    context, '/login'); // Navigate to HomeScreen
+                    context, '/login'); // Navigasi ke halaman login
               },
               child: Text('OK'),
             ),
@@ -72,7 +80,9 @@ class RegisterPage extends StatelessWidget {
         ),
       );
     } on FirebaseAuthException catch (e) {
-      Navigator.of(context).pop(); // Close the loading dialog
+      // Tutup dialog loading
+      Navigator.of(context).pop();
+      // Tampilkan dialog pendaftaran gagal
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -120,7 +130,7 @@ class RegisterPage extends StatelessWidget {
 
                 const SizedBox(height: 25),
 
-                // username textfield
+                // Text field untuk username
                 MyTextField(
                   controller: usernameController,
                   hintText: 'Username',
@@ -129,7 +139,7 @@ class RegisterPage extends StatelessWidget {
 
                 const SizedBox(height: 10),
 
-                // email textfield
+                // Text field untuk email
                 MyTextField(
                   controller: emailController,
                   hintText: 'Email',
@@ -138,7 +148,7 @@ class RegisterPage extends StatelessWidget {
 
                 const SizedBox(height: 10),
 
-                // password textfield
+                // Text field untuk password
                 MyTextField(
                   controller: passwordController,
                   hintText: 'Password',
@@ -147,7 +157,7 @@ class RegisterPage extends StatelessWidget {
 
                 const SizedBox(height: 10),
 
-                // confirm password textfield
+                // Text field untuk konfirmasi password
                 MyTextField(
                   controller: confirmPasswordController,
                   hintText: 'Confirm Password',
@@ -156,6 +166,7 @@ class RegisterPage extends StatelessWidget {
 
                 const SizedBox(height: 25),
 
+                // Tombol untuk melakukan pendaftaran
                 MyButton(
                   onTap: () => registerUser(context),
                 ),

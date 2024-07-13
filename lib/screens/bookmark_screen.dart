@@ -3,37 +3,41 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'movie_detail.dart';
 
+// Kelas StatefulWidget untuk layar bookmark
 class BookmarkScreen extends StatefulWidget {
   List<dynamic> bookmarks;
 
+  // Konstruktor dengan parameter bookmarks yang diperlukan
   BookmarkScreen({required this.bookmarks});
 
   @override
   _BookmarkScreenState createState() => _BookmarkScreenState();
 }
 
+// State class untuk BookmarkScreen
 class _BookmarkScreenState extends State<BookmarkScreen> {
   late CollectionReference bookmarksCollection;
 
   @override
   void initState() {
     super.initState();
+    // Mengatur referensi koleksi bookmarks dari Firestore
     bookmarksCollection = FirebaseFirestore.instance
         .collection('Users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('bookmarks');
 
-    // Ambil data bookmarks pertama kali saat initState
+    // Memanggil fungsi untuk mengambil data bookmarks
     getBookmarks();
   }
 
+  // Fungsi untuk mengambil data bookmarks dari Firestore
   void getBookmarks() async {
     try {
       QuerySnapshot querySnapshot = await bookmarksCollection.get();
       List<dynamic> bookmarks = querySnapshot.docs.map((doc) {
         final data = doc.data() as Map<String, dynamic>;
-        data['id'] =
-            doc.id; // Tambahkan id dokumen sebagai bagian dari data movie
+        data['id'] = doc.id; // Menambahkan id dokumen ke data movie
         return data;
       }).toList();
       setState(() {
@@ -121,6 +125,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
     );
   }
 
+  // Fungsi untuk menghapus bookmark dari Firestore
   void _removeBookmark(dynamic movie) async {
     try {
       print('Trying to remove bookmark: ${movie['id']}');

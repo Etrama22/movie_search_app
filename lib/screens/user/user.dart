@@ -4,14 +4,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:movie_search_app/screens/bookmark_screen.dart';
 import 'package:movie_search_app/screens/user/user_edit_ui.dart';
 
+// Kelas StatefulWidget untuk layar pengguna
 class UserScreen extends StatefulWidget {
   @override
   _UserScreenState createState() => _UserScreenState();
 }
 
+// State untuk UserScreen
 class _UserScreenState extends State<UserScreen> {
-  final User? user = FirebaseAuth.instance.currentUser;
+  final User? user =
+      FirebaseAuth.instance.currentUser; // Pengguna saat ini dari FirebaseAuth
 
+  // Mengambil data pengguna dari Firestore
   Future<Map<String, dynamic>?> getUserData() async {
     if (user != null) {
       DocumentSnapshot userData = await FirebaseFirestore.instance
@@ -23,10 +27,12 @@ class _UserScreenState extends State<UserScreen> {
     return null;
   }
 
+  // Memperbarui data pengguna
   void refreshUserData() {
     setState(() {});
   }
 
+  // Mengambil bookmark dari Firestore
   Future<List<dynamic>> _fetchBookmarks() async {
     List<dynamic> bookmarks = [];
     if (user != null) {
@@ -74,7 +80,7 @@ class _UserScreenState extends State<UserScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  // User Information
+                  // Informasi pengguna
                   Column(
                     children: [
                       CircleAvatar(
@@ -98,6 +104,7 @@ class _UserScreenState extends State<UserScreen> {
 
                   SizedBox(height: 20),
 
+                  // Kartu untuk pengaturan akun
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
@@ -129,6 +136,7 @@ class _UserScreenState extends State<UserScreen> {
 
                   SizedBox(height: 20),
 
+                  // Kartu untuk bookmark
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
@@ -160,7 +168,7 @@ class _UserScreenState extends State<UserScreen> {
 
                   SizedBox(height: 20),
 
-                  // Settings
+                  // Kartu untuk logout
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),

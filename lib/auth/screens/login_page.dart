@@ -8,12 +8,13 @@ import 'reg_page.dart';
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
-  // text editing controllers
+  // Pengontrol untuk mengedit teks email dan password
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  // sign user in method
+  // Metode untuk masuk pengguna
   void signUserIn(BuildContext context) async {
+    // Menampilkan dialog loading
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -21,23 +22,26 @@ class LoginPage extends StatelessWidget {
     );
 
     try {
+      // Mencoba masuk dengan email dan password
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-      Navigator.of(context).pop(); // Close the loading dialog
+      // Menutup dialog loading
+      Navigator.of(context).pop();
+      // Menampilkan dialog sukses
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Login Successful'),
-          content: Text('You have successfully logged in!'),
+          title: Text('Login Berhasil'),
+          content: Text('Anda telah berhasil masuk!'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.pushReplacementNamed(
-                    context, '/home'); // Navigate to HomeScreen
+                    context, '/home'); // Navigasi ke HomeScreen
               },
               child: Text('OK'),
             ),
@@ -45,11 +49,13 @@ class LoginPage extends StatelessWidget {
         ),
       );
     } on FirebaseAuthException catch (e) {
-      Navigator.of(context).pop(); // Close the loading dialog
+      // Menutup dialog loading
+      Navigator.of(context).pop();
+      // Menampilkan dialog gagal
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Login Failed'),
+          title: Text('Login Gagal'),
           content: Text(e.message.toString()),
           actions: [
             TextButton(
@@ -67,7 +73,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true, // Adjust this as needed
+      resizeToAvoidBottomInset: true, // Sesuaikan ini sesuai kebutuhan
       backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: SingleChildScrollView(
@@ -85,7 +91,7 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 50),
 
-                // welcome back, you've been missed!
+                // Selamat datang kembali, Anda telah dirindukan!
                 Text(
                   'Welcome back you\'ve been missed!',
                   style: TextStyle(
@@ -96,7 +102,7 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 25),
 
-                // username textfield
+                // textfield untuk username
                 MyTextField(
                   controller: emailController,
                   hintText: 'Email',
@@ -105,7 +111,7 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 10),
 
-                // password textfield
+                // textfield untuk password
                 MyTextField(
                   controller: passwordController,
                   hintText: 'Password',
@@ -114,7 +120,7 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 10),
 
-                // forgot password?
+                // lupa password?
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
@@ -130,14 +136,14 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 25),
 
-                // sign in button
+                // tombol masuk
                 MyButton(
                   onTap: () => signUserIn(context), // Ubah ini
                 ),
 
                 const SizedBox(height: 50),
 
-                // or continue with
+                // atau lanjutkan dengan
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
@@ -167,23 +173,23 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 50),
 
-                // google + apple sign in buttons
+                // tombol masuk google dan apple
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    // google button
+                    // tombol google
                     SquareTile(imagePath: 'assets/google.png'),
 
                     SizedBox(width: 25),
 
-                    // apple button
+                    // tombol apple
                     SquareTile(imagePath: 'assets/apple.png')
                   ],
                 ),
 
                 const SizedBox(height: 50),
 
-                // not a member? register now
+                // belum menjadi anggota? daftar sekarang
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

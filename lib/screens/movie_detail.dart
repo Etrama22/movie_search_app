@@ -4,17 +4,20 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+// Kelas untuk menampilkan detail film
 class MovieDetailScreen extends StatelessWidget {
-  final dynamic movie;
+  final dynamic movie; // Variabel untuk menyimpan detail film
 
+  // Konstruktor dengan parameter movie yang diperlukan
   MovieDetailScreen({required this.movie});
 
   @override
   Widget build(BuildContext context) {
+    // Membangun tampilan detail film
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          movie['title'] ?? 'Movie Details',
+          movie['title'] ?? 'Movie Details', // Judul film atau teks default
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.black,
@@ -25,6 +28,7 @@ class MovieDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Menampilkan poster film jika tersedia
             if (movie['poster_path'] != null)
               Container(
                 decoration: BoxDecoration(
@@ -33,7 +37,7 @@ class MovieDetailScreen extends StatelessWidget {
                       color: Colors.black.withOpacity(0.8),
                       spreadRadius: 2,
                       blurRadius: 5,
-                      offset: Offset(0, 3), // changes position of shadow
+                      offset: Offset(0, 3), // Posisi bayangan
                     ),
                   ],
                 ),
@@ -48,6 +52,7 @@ class MovieDetailScreen extends StatelessWidget {
                 ),
               ),
             SizedBox(height: 16.0),
+            // Menampilkan judul film
             Text(
               movie['title'] ?? 'No Title',
               style: TextStyle(
@@ -57,6 +62,7 @@ class MovieDetailScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8.0),
+            // Menampilkan tanggal rilis film
             Text(
               'Release Date: ${movie['release_date'] ?? 'Unknown'}',
               style: TextStyle(
@@ -68,6 +74,7 @@ class MovieDetailScreen extends StatelessWidget {
             SizedBox(height: 8.0),
             Divider(),
             SizedBox(height: 8.0),
+            // Menampilkan judul bagian sinopsis
             Text(
               'Overview',
               style: TextStyle(
@@ -77,6 +84,7 @@ class MovieDetailScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8.0),
+            // Menampilkan sinopsis film
             Text(
               movie['overview'] ?? 'No overview available.',
               style: TextStyle(
@@ -86,6 +94,7 @@ class MovieDetailScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16.0),
+            // Menampilkan rating film jika tersedia
             if (movie['vote_average'] != null)
               Row(
                 children: [
@@ -106,13 +115,14 @@ class MovieDetailScreen extends StatelessWidget {
                 ],
               ),
             SizedBox(height: 16.0),
+            // Menampilkan tombol aksi
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 IconButton(
                   icon: Icon(Icons.bookmark_border),
                   onPressed: () {
-                    _addToBookmark(context);
+                    _addToBookmark(context); // Menambahkan ke bookmark
                   },
                 ),
                 IconButton(
@@ -120,7 +130,7 @@ class MovieDetailScreen extends StatelessWidget {
                   onPressed: () {
                     final url =
                         'https://www.themoviedb.org/movie/${movie['id']}';
-                    _launchURL(url);
+                    _launchURL(url); // Membuka URL
                   },
                 ),
                 IconButton(
@@ -128,7 +138,8 @@ class MovieDetailScreen extends StatelessWidget {
                   onPressed: () {
                     final url =
                         'https://www.themoviedb.org/movie/${movie['id']}';
-                    Share.share('Check out this movie: ${movie['title']} $url');
+                    Share.share(
+                        'Check out this movie: ${movie['title']} $url'); // Berbagi URL
                   },
                 ),
               ],
@@ -139,6 +150,7 @@ class MovieDetailScreen extends StatelessWidget {
     );
   }
 
+  // Fungsi untuk menambahkan film ke bookmark
   void _addToBookmark(BuildContext context) async {
     final User? user = FirebaseAuth.instance.currentUser;
     if (user == null) {
@@ -173,6 +185,7 @@ class MovieDetailScreen extends StatelessWidget {
     }
   }
 
+  // Fungsi untuk membuka URL
   void _launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);

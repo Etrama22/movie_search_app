@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import '../services/api.dart';
 
+// Widget untuk bilah pencarian film
 class MovieSearchBar extends StatefulWidget {
   final Function(List<dynamic>) onMoviesFetched;
 
+  // Konstruktor dengan fungsi callback untuk hasil pencarian
   MovieSearchBar({required this.onMoviesFetched});
 
   @override
@@ -27,6 +29,7 @@ class _MovieSearchBarState extends State<MovieSearchBar> {
     super.dispose();
   }
 
+  // Fungsi yang dipanggil saat teks pencarian berubah
   void _onSearchTextChanged() {
     if (_searchController.text.isEmpty) {
       widget.onMoviesFetched([]);
@@ -37,6 +40,7 @@ class _MovieSearchBarState extends State<MovieSearchBar> {
     }
   }
 
+  // Fungsi untuk mengambil film berdasarkan query
   void _fetchMovies(String query) async {
     setState(() {
       _isLoading = true;
@@ -58,6 +62,7 @@ class _MovieSearchBarState extends State<MovieSearchBar> {
     }
   }
 
+  // Fungsi untuk mengambil film secara acak
   void _fetchRandomMovies() async {
     try {
       final movies = await ApiService.fetchRandomMovies();

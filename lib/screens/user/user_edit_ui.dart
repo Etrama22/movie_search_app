@@ -1,3 +1,4 @@
+// Impor paket-paket yang diperlukan
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,10 +6,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
+// Definisi kelas untuk layar pengaturan akun
 class AccountSettingsScreen extends StatefulWidget {
   final String username;
   final VoidCallback onUsernameChanged;
 
+  // Konstruktor untuk inisialisasi variabel
   AccountSettingsScreen({
     required this.username,
     required this.onUsernameChanged,
@@ -18,6 +21,7 @@ class AccountSettingsScreen extends StatefulWidget {
   _AccountSettingsScreenState createState() => _AccountSettingsScreenState();
 }
 
+// State class untuk AccountSettingsScreen
 class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -25,12 +29,14 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
   final ImagePicker _picker = ImagePicker();
   XFile? _selectedImage;
 
+  // Inisialisasi state
   @override
   void initState() {
     super.initState();
     usernameController.text = widget.username;
   }
 
+  // Fungsi untuk memperbarui username
   Future<void> updateUsername() async {
     setState(() {
       isLoading = true;
@@ -55,6 +61,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
     }
   }
 
+  // Fungsi untuk memilih gambar
   Future<void> pickImage() async {
     try {
       final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
@@ -68,6 +75,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
     }
   }
 
+  // Fungsi untuk mengunggah gambar
   Future<void> uploadImage() async {
     if (_selectedImage != null) {
       setState(() {
@@ -110,14 +118,17 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
     }
   }
 
+  // Fungsi untuk reset password
   void resetPassword() {
-    // Implement reset password functionality here
+    // Implementasi fungsi reset password
   }
 
+  // Fungsi untuk menghapus akun
   void deleteAccount() {
-    // Implement delete account functionality here
+    // Implementasi fungsi menghapus akun
   }
 
+  // Membangun UI
   @override
   Widget build(BuildContext context) {
     return Scaffold(

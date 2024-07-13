@@ -1,3 +1,4 @@
+// Impor paket yang diperlukan
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,6 +9,7 @@ import 'screens/home_screen.dart';
 import 'screens/hot_movie.dart';
 import 'screens/user/user.dart';
 
+// Fungsi utama untuk menjalankan aplikasi
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -16,6 +18,7 @@ void main() async {
   runApp(MyApp());
 }
 
+// Kelas MyApp untuk mengatur tema dan rute aplikasi
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/register': (context) => RegisterPage(),
         '/home': (context) => MainScreen(),
-        // Keep routes to individual screens if you need to navigate to them directly.
+        // Menyimpan rute ke layar individu untuk navigasi langsung
         '/home_screen': (context) => HomeScreen(),
         '/hot_movie': (context) => HotMovieScreen(),
         '/user': (context) => UserScreen(),
@@ -38,11 +41,13 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// Kelas MainScreen untuk mengatur tampilan utama aplikasi
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
+// State dari MainScreen untuk mengatur navigasi dan tampilan
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
